@@ -9,6 +9,10 @@
   "engines": {
     "vscode": "^1.95.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adityaputra11/sholat-reminder.git"
+  },
   "categories": [
     "Other"
   ],
