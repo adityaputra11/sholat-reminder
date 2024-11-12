@@ -48,7 +48,8 @@ Untuk menggunakan ekstensi ini, Anda memerlukan City ID yang sesuai dengan lokas
 
 ## Contoh Tampilan
 
-<!-- ![Sholat Reminder Status Bar](media/screenshot.png) -->
+<img width="102" alt="Screenshot 2024-11-12 at 11 10 27 PM" src="https://github.com/user-attachments/assets/cdcca550-837a-4e8f-8bc6-62ed56468e68">
+
 
 ## Lisensi
 
