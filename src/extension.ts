@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
       quickPick.placeholder = "Pilih atau cari opsi...";
 
       if (cityID) {
-        saveCityID(cityID);
+        saveCityID(context, cityID);
         vscode.window.showInformationMessage(
           `City ID ${cityID} berhasil disimpan.`
         );
@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
             `You Choose: ${selection[0].detail}`
           );
           if (selection[0].detail) {
-            saveCityID(selection[0].detail);
+            saveCityID(context, selection[0].detail);
             vscode.window.showInformationMessage(
               `City ${selection[0].label} save succesfully.`
             );
@@ -81,7 +81,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   async function fetchSholatTime(date: string): Promise<Schedule> {
     try {
-      const localCityID = await getCityID();
+      const localCityID = getCityID(context);
       const cityID = localCityID || "1301";
       const url = `${baseUrl}/${version}/sholat/jadwal/${cityID}/${date}`;
       const response = await axios.get<ScheduleResponse>(url);
@@ -94,8 +94,6 @@ export function activate(context: vscode.ExtensionContext) {
 
   async function fetchCity(): Promise<LocationResponse> {
     try {
-      const localCityID = await getCityID();
-      const cityID = localCityID || "1301";
       const url = `${baseUrl}/${version}/sholat/kota/semua`;
       const response = await axios.get<LocationResponse>(url);
       return response.data;
