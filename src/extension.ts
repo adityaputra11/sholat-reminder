@@ -47,9 +47,6 @@ export function activate(context: vscode.ExtensionContext) {
 
       quickPick.onDidChangeSelection((selection) => {
         if (selection[0]) {
-          vscode.window.showInformationMessage(
-            `You Choose: ${selection[0].detail}`
-          );
           if (selection[0].detail) {
             saveCityID(context, selection[0].detail);
             vscode.window.showInformationMessage(
