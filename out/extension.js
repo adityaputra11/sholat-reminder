@@ -34,6 +34,9 @@ const pray_constant_1 = require("./constant/pray.constant");
 const time_1 = require("./utils/time");
 const alert_1 = require("./utils/alert");
 const db_1 = require("./config/db");
+const location_1 = require("./utils/location");
+const baseUrl = "https://api.myquran.com";
+const version = "v2";
 function activate(context) {
     (0, db_1.initializeDatabase)();
     context.subscriptions.push(vscode.commands.registerCommand("extension.setCityID", async () => {
@@ -41,6 +44,8 @@ function activate(context) {
             placeHolder: "Masukkan City ID untuk jadwal sholat",
             prompt: "City ID",
         });
+        const quickPick = vscode.window.createQuickPick();
+        quickPick.placeholder = "Pilih atau cari opsi...";
         if (cityID) {
             (0, db_1.saveCityID)(cityID);
             vscode.window.showInformationMessage(`City ID ${cityID} berhasil disimpan.`);
@@ -49,6 +54,26 @@ function activate(context) {
         else {
             vscode.window.showErrorMessage("City ID tidak valid.");
         }
+    }), vscode.commands.registerCommand("extension.searchCity", async () => {
+        const quickPick = vscode.window.createQuickPick();
+        quickPick.placeholder = "Choose city ...";
+        const data = await fetchCity();
+        const items = (0, location_1.convertToQuickPickItems)(data);
+        quickPick.items = items;
+        quickPick.onDidChangeSelection((selection) => {
+            if (selection[0]) {
+                vscode.window.showInformationMessage(`You Choose: ${selection[0].detail}`);
+                if (selection[0].detail) {
+                    (0, db_1.saveCityID)(selection[0].detail);
+                    vscode.window.showInformationMessage(`City ${selection[0].label} save succesfully.`);
+                    vscode.commands.executeCommand("workbench.action.reloadWindow");
+                }
+                quickPick.hide();
+            }
+        });
+        // Event ketika dropdown dibatalkan
+        quickPick.onDidHide(() => quickPick.dispose());
+        quickPick.show();
     }));
     const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBar.text = "Mengambil jadwal sholat...";
@@ -58,13 +83,24 @@ function activate(context) {
     let interval;
     async function fetchSholatTime(date) {
         try {
-            const baseUrl = "https://api.myquran.com";
-            const version = "v2";
             const localCityID = await (0, db_1.getCityID)();
             const cityID = localCityID || "1301";
             const url = `${baseUrl}/${version}/sholat/jadwal/${cityID}/${date}`;
             const response = await axios_1.default.get(url);
             return response.data.data.jadwal;
+        }
+        catch (error) {
+            console.error("Error fetching sholat time:", error);
+            throw new Error("Gagal mengambil jadwal sholat.");
+        }
+    }
+    async function fetchCity() {
+        try {
+            const localCityID = await (0, db_1.getCityID)();
+            const cityID = localCityID || "1301";
+            const url = `${baseUrl}/${version}/sholat/kota/semua`;
+            const response = await axios_1.default.get(url);
+            return response.data;
         }
         catch (error) {
             console.error("Error fetching sholat time:", error);
