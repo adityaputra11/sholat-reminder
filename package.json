@@ -38,7 +38,6 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.11",
     "@types/mocha": "^10.0.9",
     "@types/node": "20.x",
     "@types/vscode": "^1.95.0",
@@ -51,8 +50,6 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "better-sqlite3": "^11.5.0",
-    "dotenv": "^16.4.5",
     "sqlite3": "^5.1.7"
   }
 }
