@@ -38,7 +38,6 @@ const location_1 = require("./utils/location");
 const baseUrl = "https://api.myquran.com";
 const version = "v2";
 function activate(context) {
-    (0, db_1.initializeDatabase)();
     context.subscriptions.push(vscode.commands.registerCommand("extension.setCityID", async () => {
         const cityID = await vscode.window.showInputBox({
             placeHolder: "Masukkan City ID untuk jadwal sholat",
@@ -49,7 +48,7 @@ function activate(context) {
         if (cityID) {
             (0, db_1.saveCityID)(cityID);
             vscode.window.showInformationMessage(`City ID ${cityID} berhasil disimpan.`);
-            vscode.commands.executeCommand("workbench.action.reloadWindow");
+            getSholatTime(today);
         }
         else {
             vscode.window.showErrorMessage("City ID tidak valid.");
@@ -66,7 +65,7 @@ function activate(context) {
                 if (selection[0].detail) {
                     (0, db_1.saveCityID)(selection[0].detail);
                     vscode.window.showInformationMessage(`City ${selection[0].label} save succesfully.`);
-                    vscode.commands.executeCommand("workbench.action.reloadWindow");
+                    getSholatTime(today);
                 }
                 quickPick.hide();
             }

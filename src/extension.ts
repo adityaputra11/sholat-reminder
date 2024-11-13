@@ -9,15 +9,13 @@ import {
 import { PrayName } from "./constant/pray.constant";
 import { calculateCownDown, getTomorrowDate } from "./utils/time";
 import { showFullScreenAlert } from "./utils/alert";
-import { getCityID, initializeDatabase, saveCityID } from "./config/db";
+import { getCityID, saveCityID } from "./config/db";
 import { convertToQuickPickItems } from "./utils/location";
 
 const baseUrl = "https://api.myquran.com";
 const version = "v2";
 
 export function activate(context: vscode.ExtensionContext) {
-  initializeDatabase();
-
   context.subscriptions.push(
     vscode.commands.registerCommand("extension.setCityID", async () => {
       const cityID = await vscode.window.showInputBox({
@@ -33,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage(
           `City ID ${cityID} berhasil disimpan.`
         );
-        vscode.commands.executeCommand("workbench.action.reloadWindow");
+        getSholatTime(today);
       } else {
         vscode.window.showErrorMessage("City ID tidak valid.");
       }
@@ -57,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.window.showInformationMessage(
               `City ${selection[0].label} save succesfully.`
             );
-            vscode.commands.executeCommand("workbench.action.reloadWindow");
+            getSholatTime(today);
           }
           quickPick.hide();
         }
