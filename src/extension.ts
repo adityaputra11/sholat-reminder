@@ -100,7 +100,8 @@ export function activate(context: vscode.ExtensionContext) {
             }
           }, 1000);
           break;
-        } else {
+        }
+        if (nowDateTime > prayTimeDate && sholat.name === PrayName.Isya) {
           clearInterval(interval);
 
           const [tommorowDate, tommorowString] = getTomorrowDate();

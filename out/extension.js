@@ -111,7 +111,7 @@ function activate(context) {
                     }, 1000);
                     break;
                 }
-                else {
+                if (nowDateTime > prayTimeDate && sholat.name === pray_constant_1.PrayName.Isya) {
                     clearInterval(interval);
                     const [tommorowDate, tommorowString] = (0, time_1.getTomorrowDate)();
                     const tomorrowSchedule = await fetchSholatTime(tommorowString);
