@@ -34,7 +34,7 @@ Untuk menggunakan ekstensi ini, Anda memerlukan City ID yang sesuai dengan lokas
 1. **Mengatur Berdasarkan City**:
 
    - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
-   - Ketik `Sholat Reminder: Set City` dan pilih perintah tersebut.
+   - Ketik `Sholat Reminder: Search City` dan pilih perintah tersebut.
    - Masukkan City sesuai lokasi Anda untuk menampilkan jadwal sholat yang sesuai.
 
 2. **Mengatur City ID**:

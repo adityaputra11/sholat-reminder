@@ -23,43 +23,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initializeDatabase = initializeDatabase;
 exports.saveCityID = saveCityID;
 exports.getCityID = getCityID;
-const path = __importStar(require("path"));
-const sqlite3 = __importStar(require("sqlite3"));
-const dbPath = path.join(__dirname, "settings.db");
-const db = new sqlite3.Database(dbPath);
-function initializeDatabase() {
-    db.run(`
-    CREATE TABLE IF NOT EXISTS settings (
-      key TEXT PRIMARY KEY,
-      value TEXT
-    )
-  `);
-}
+const vscode = __importStar(require("vscode"));
 function saveCityID(cityID) {
-    return new Promise((resolve, reject) => {
-        db.run("INSERT INTO settings (key, value) VALUES ('cityID', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value", [cityID], function (err) {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve();
-            }
-        });
-    });
+    return vscode.commands.executeCommand("setContext", "cityID", cityID);
 }
 function getCityID() {
-    return new Promise((resolve, reject) => {
-        db.get("SELECT value FROM settings WHERE key = ?", ["cityID"], (err, row) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve(row ? row.value : null);
-            }
-        });
-    });
+    return vscode.workspace.getConfiguration().get("cityID");
 }
 //# sourceMappingURL=db.js.map
