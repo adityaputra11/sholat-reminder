@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5] - 2023-11-12
+
+- **Fitur Search By City**: Pengguna dapat mencari berdasarkan City untuk menampilkan jadwal sholat sesuai lokasi mereka.
+
 ## [1.0.4] - 2023-11-12
 
 - **Bug Fix**

@@ -31,18 +31,24 @@ Untuk menggunakan ekstensi ini, Anda memerlukan City ID yang sesuai dengan lokas
 
 ## Cara Menggunakan
 
-1. **Mengatur City ID**:
+1. **Mengatur Berdasarkan City**:
 
    - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
-   - Ketik `Set City ID for Sholat Reminder` dan pilih perintah tersebut.
+   - Ketik `Sholat Reminder: Set City` dan pilih perintah tersebut.
+   - Masukkan City sesuai lokasi Anda untuk menampilkan jadwal sholat yang sesuai.
+
+2. **Mengatur City ID**:
+
+   - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
+   - Ketik `Sholat Reminder: Set City ID` dan pilih perintah tersebut.
    - Masukkan City ID sesuai lokasi Anda untuk menampilkan jadwal sholat yang sesuai.
 
-2. **Menampilkan Pengingat Waktu Sholat**:
+3. **Menampilkan Pengingat Waktu Sholat**:
 
    - Ekstensi akan menampilkan waktu sholat berikutnya dalam bentuk countdown di status bar.
    - Ketika waktu sholat tiba, akan muncul notifikasi layar penuh di VSCode.
 
-3. **Merubah City ID**:
+4. **Merubah City ID**:
    - Jika Anda berpindah lokasi, Anda dapat mengubah City ID dengan perintah yang sama di Command Palette.
    - Setelah City ID berhasil diperbarui, VSCode akan otomatis reload untuk menerapkan perubahan.
 

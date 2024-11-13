@@ -16,3 +16,16 @@ export type ScheduleResponse = {
     jadwal: Schedule;
   };
 };
+
+export type LocationPray = {
+  id: string;
+  lokasi: string;
+};
+
+export type LocationResponse = {
+  data: LocationPray[];
+};
+
+export type LocationObj = {
+  [key: string]: string;
+};

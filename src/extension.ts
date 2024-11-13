@@ -1,10 +1,19 @@
 import * as vscode from "vscode";
 import axios from "axios";
-import { Schedule, ScheduleResponse } from "./model/pray.model";
+import {
+  LocationPray,
+  LocationResponse,
+  Schedule,
+  ScheduleResponse,
+} from "./model/pray.model";
 import { PrayName } from "./constant/pray.constant";
 import { calculateCownDown, getTomorrowDate } from "./utils/time";
 import { showFullScreenAlert } from "./utils/alert";
 import { getCityID, initializeDatabase, saveCityID } from "./config/db";
+import { convertToQuickPickItems } from "./utils/location";
+
+const baseUrl = "https://api.myquran.com";
+const version = "v2";
 
 export function activate(context: vscode.ExtensionContext) {
   initializeDatabase();
@@ -16,6 +25,9 @@ export function activate(context: vscode.ExtensionContext) {
         prompt: "City ID",
       });
 
+      const quickPick = vscode.window.createQuickPick();
+      quickPick.placeholder = "Pilih atau cari opsi...";
+
       if (cityID) {
         saveCityID(cityID);
         vscode.window.showInformationMessage(
@@ -25,6 +37,36 @@ export function activate(context: vscode.ExtensionContext) {
       } else {
         vscode.window.showErrorMessage("City ID tidak valid.");
       }
+    }),
+    vscode.commands.registerCommand("extension.searchCity", async () => {
+      const quickPick = vscode.window.createQuickPick();
+      quickPick.placeholder = "Choose city ...";
+
+      const data = await fetchCity();
+      const items = convertToQuickPickItems(data);
+
+      quickPick.items = items;
+
+      quickPick.onDidChangeSelection((selection) => {
+        if (selection[0]) {
+          vscode.window.showInformationMessage(
+            `You Choose: ${selection[0].detail}`
+          );
+          if (selection[0].detail) {
+            saveCityID(selection[0].detail);
+            vscode.window.showInformationMessage(
+              `City ${selection[0].label} save succesfully.`
+            );
+            vscode.commands.executeCommand("workbench.action.reloadWindow");
+          }
+          quickPick.hide();
+        }
+      });
+
+      // Event ketika dropdown dibatalkan
+      quickPick.onDidHide(() => quickPick.dispose());
+
+      quickPick.show();
     })
   );
 
@@ -41,13 +83,24 @@ export function activate(context: vscode.ExtensionContext) {
 
   async function fetchSholatTime(date: string): Promise<Schedule> {
     try {
-      const baseUrl = "https://api.myquran.com";
-      const version = "v2";
       const localCityID = await getCityID();
       const cityID = localCityID || "1301";
       const url = `${baseUrl}/${version}/sholat/jadwal/${cityID}/${date}`;
       const response = await axios.get<ScheduleResponse>(url);
       return response.data.data.jadwal;
+    } catch (error) {
+      console.error("Error fetching sholat time:", error);
+      throw new Error("Gagal mengambil jadwal sholat.");
+    }
+  }
+
+  async function fetchCity(): Promise<LocationResponse> {
+    try {
+      const localCityID = await getCityID();
+      const cityID = localCityID || "1301";
+      const url = `${baseUrl}/${version}/sholat/kota/semua`;
+      const response = await axios.get<LocationResponse>(url);
+      return response.data;
     } catch (error) {
       console.error("Error fetching sholat time:", error);
       throw new Error("Gagal mengambil jadwal sholat.");
