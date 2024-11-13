@@ -46,7 +46,7 @@ function activate(context) {
         const quickPick = vscode.window.createQuickPick();
         quickPick.placeholder = "Pilih atau cari opsi...";
         if (cityID) {
-            (0, db_1.saveCityID)(cityID);
+            (0, db_1.saveCityID)(context, cityID);
             vscode.window.showInformationMessage(`City ID ${cityID} berhasil disimpan.`);
             getSholatTime(today);
         }
@@ -63,7 +63,9 @@ function activate(context) {
             if (selection[0]) {
                 vscode.window.showInformationMessage(`You Choose: ${selection[0].detail}`);
                 if (selection[0].detail) {
-                    (0, db_1.saveCityID)(selection[0].detail);
+                    (0, db_1.saveCityID)(context, selection[0].detail);
+                    let cityID = (0, db_1.getCityID)(context);
+                    console.log(cityID);
                     vscode.window.showInformationMessage(`City ${selection[0].label} save succesfully.`);
                     getSholatTime(today);
                 }
@@ -82,7 +84,7 @@ function activate(context) {
     let interval;
     async function fetchSholatTime(date) {
         try {
-            const localCityID = await (0, db_1.getCityID)();
+            const localCityID = (0, db_1.getCityID)(context);
             const cityID = localCityID || "1301";
             const url = `${baseUrl}/${version}/sholat/jadwal/${cityID}/${date}`;
             const response = await axios_1.default.get(url);
@@ -95,8 +97,6 @@ function activate(context) {
     }
     async function fetchCity() {
         try {
-            const localCityID = await (0, db_1.getCityID)();
-            const cityID = localCityID || "1301";
             const url = `${baseUrl}/${version}/sholat/kota/semua`;
             const response = await axios_1.default.get(url);
             return response.data;
