@@ -115,6 +115,9 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   async function getSholatTime(date: string) {
+    await showFullScreenAlert(context, "sholat.name", "sholat.time", () =>
+      getSholatTime(today)
+    );
     try {
       statusBar.text = "Jadwal sholat berhasil diambil.";
       const schedule = await fetchSholatTime(date);

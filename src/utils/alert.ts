@@ -1,4 +1,10 @@
 import * as vscode from "vscode";
+import { QuoteSholat } from "../constant/quote.constant";
+
+function randomQuote<T>(array: T[]): T {
+  const indeksAcak = Math.floor(Math.random() * array.length);
+  return array[indeksAcak];
+}
 
 export async function showFullScreenAlert(
   context: vscode.ExtensionContext,
@@ -12,6 +18,8 @@ export async function showFullScreenAlert(
     vscode.ViewColumn.One,
     { enableScripts: true }
   );
+
+  const quote = randomQuote(QuoteSholat);
 
   panel.webview.html = `
       <!DOCTYPE html>
@@ -46,12 +54,18 @@ export async function showFullScreenAlert(
             color: white;
             border-radius: 5px;
           }
+          q {
+              font-size: 2em;
+              font-style: italic;
+          }
         </style>
       </head>
       <body>
         <div>
           <h1>Waktu Sholat ${sholatName}</h1>
           <p>Telah tiba pada pukul ${sholatTime}</p>
+            <q>${quote.quote}</q>
+            <h2>${quote.source}</h2>
           <button onclick="closePanel()">Tutup</button>
         </div>
         <script>
