@@ -1,4 +1,5 @@
 node_modules
 out
-.package-lock.json
+package-lock.json
 yarn.lock
+*.vsix
