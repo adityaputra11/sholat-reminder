@@ -66,6 +66,7 @@ Ekstensi ini dilisensikan di bawah [MIT License](LICENSE.md).
 ## Kontribusi
 
 Kami menyambut kontribusi dari komunitas! Silakan fork repositori ini dan buat pull request untuk perbaikan atau fitur baru.
+silahkan email saya adityaputrapratama39@gmail.com jika kesulitan
 
 ## Catatan
 
