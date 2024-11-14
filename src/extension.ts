@@ -9,13 +9,23 @@ import {
 import { PrayName } from "./constant/pray.constant";
 import { calculateCownDown, getTomorrowDate } from "./utils/time";
 import { showFullScreenAlert } from "./utils/alert";
-import { getCityID, saveCityID } from "./config/db";
+import { 
+  getCityID, 
+  saveCityID, 
+  getCityName, 
+  saveCityName,
+  getIsShowCityName,
+  saveIsShowCityName,
+} from "./config/db";
 import { convertToQuickPickItems } from "./utils/location";
 
 const baseUrl = "https://api.myquran.com";
 const version = "v2";
 
 export function activate(context: vscode.ExtensionContext) {
+  if (getIsShowCityName(context) === undefined) {
+    saveIsShowCityName(context, true);
+  }
   context.subscriptions.push(
     vscode.commands.registerCommand("extension.setCityID", async () => {
       const cityID = await vscode.window.showInputBox({
@@ -62,7 +72,10 @@ export function activate(context: vscode.ExtensionContext) {
       quickPick.onDidHide(() => quickPick.dispose());
 
       quickPick.show();
-    })
+    }),
+    vscode.commands.registerCommand("extension.toogleCityName", async () => {
+      saveIsShowCityName(context, !getIsShowCityName(context));
+    }),
   );
 
   const statusBar = vscode.window.createStatusBarItem(
@@ -82,6 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
       const cityID = localCityID || "1301";
       const url = `${baseUrl}/${version}/sholat/jadwal/${cityID}/${date}`;
       const response = await axios.get<ScheduleResponse>(url);
+      saveCityName(context, response.data.data.lokasi);
       return response.data.data.jadwal;
     } catch (error) {
       console.error("Error fetching sholat time:", error);
@@ -104,6 +118,7 @@ export function activate(context: vscode.ExtensionContext) {
     try {
       statusBar.text = "Jadwal sholat berhasil diambil.";
       const schedule = await fetchSholatTime(date);
+      const lokasi = getCityName(context);
       const nowDateTime = new Date();
       const prayTime = [
         { name: PrayName.Subuh, time: schedule.subuh },
@@ -142,7 +157,8 @@ export function activate(context: vscode.ExtensionContext) {
               await showFullScreenAlert(context, sholat.name, sholat.time);
             } else {
               const cdTime = calculateCownDown(selisihWaktu);
-              statusBar.text = `$(zap) ${sholat.name}(${sholat.time}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}`;
+              const lokasiLabel = getIsShowCityName(context) ? ` [${lokasi}]` : '';
+              statusBar.text = `$(zap) ${sholat.name}(${sholat.time}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}${lokasiLabel}`;
             }
           }, 1000);
           break;
@@ -172,7 +188,8 @@ export function activate(context: vscode.ExtensionContext) {
               );
             } else {
               const cdTime = calculateCownDown(selisihWaktu);
-              statusBar.text = `$(zap) ${PrayName.Subuh}(${tomorrowSchedule.subuh}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}`;
+              const lokasiLabel = getIsShowCityName(context) ? ` [${lokasi}]` : '';
+              statusBar.text = `$(zap) ${PrayName.Subuh}(${tomorrowSchedule.subuh}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}${lokasiLabel}`;
             }
           }, 1000);
           break;

@@ -1,7 +1,7 @@
 # Sholat Reminder
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.0.9-brightgreen.svg)
 ![Maintained](https://img.shields.io/badge/maintained-yes-green.svg)
 ![Download](https://img.shields.io/visual-studio-marketplace/d/AdityaPutraPratama.sholat-reminder)
 
@@ -54,6 +54,11 @@ Untuk menggunakan ekstensi ini, Anda memerlukan City ID yang sesuai dengan lokas
 4. **Merubah City ID**:
    - Jika Anda berpindah lokasi, Anda dapat mengubah City ID dengan perintah yang sama di Command Palette.
    - Setelah City ID berhasil diperbarui, VSCode akan otomatis reload untuk menerapkan perubahan.
+
+5. **Menampilkan/Menyembunyikan City Name**:
+   - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
+   - Ketik `Sholat Reminder: Toogle City Name` dan pilih perintah tersebut.
+   - Maka City Name pada Status Bar akan tampil/hilang sesuai kebutuhan Anda.
 
 ## Contoh Tampilan
 
