@@ -9,10 +9,10 @@ import {
 import { PrayName } from "./constant/pray.constant";
 import { calculateCownDown, getTomorrowDate } from "./utils/time";
 import { showFullScreenAlert } from "./utils/alert";
-import { 
-  getCityID, 
-  saveCityID, 
-  getCityName, 
+import {
+  getCityID,
+  saveCityID,
+  getCityName,
   saveCityName,
   getIsShowCityName,
   saveIsShowCityName,
@@ -75,7 +75,7 @@ export function activate(context: vscode.ExtensionContext) {
     }),
     vscode.commands.registerCommand("extension.toogleCityName", async () => {
       saveIsShowCityName(context, !getIsShowCityName(context));
-    }),
+    })
   );
 
   const statusBar = vscode.window.createStatusBarItem(
@@ -154,10 +154,14 @@ export function activate(context: vscode.ExtensionContext) {
               vscode.window.showInformationMessage(
                 `waktu sholat ${sholat.name} telah tiba (${sholat.time}).`
               );
-              await showFullScreenAlert(context, sholat.name, sholat.time);
+              await showFullScreenAlert(context, sholat.name, sholat.time, () =>
+                getSholatTime(today)
+              );
             } else {
               const cdTime = calculateCownDown(selisihWaktu);
-              const lokasiLabel = getIsShowCityName(context) ? ` [${lokasi}]` : '';
+              const lokasiLabel = getIsShowCityName(context)
+                ? ` [${lokasi}]`
+                : "";
               statusBar.text = `$(zap) ${sholat.name}(${sholat.time}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}${lokasiLabel}`;
             }
           }, 1000);
@@ -184,11 +188,14 @@ export function activate(context: vscode.ExtensionContext) {
               await showFullScreenAlert(
                 context,
                 PrayName.Subuh,
-                tomorrowSchedule.subuh
+                tomorrowSchedule.subuh,
+                () => getSholatTime(today)
               );
             } else {
               const cdTime = calculateCownDown(selisihWaktu);
-              const lokasiLabel = getIsShowCityName(context) ? ` [${lokasi}]` : '';
+              const lokasiLabel = getIsShowCityName(context)
+                ? ` [${lokasi}]`
+                : "";
               statusBar.text = `$(zap) ${PrayName.Subuh}(${tomorrowSchedule.subuh}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}${lokasiLabel}`;
             }
           }, 1000);

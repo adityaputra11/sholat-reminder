@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.10] - 2023-11-12
+
+- **Refresh on close modal**
+
 ## [1.0.6] - 2023-11-12
 
 - **Fix Crash Command**

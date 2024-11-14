@@ -3,7 +3,8 @@ import * as vscode from "vscode";
 export async function showFullScreenAlert(
   context: vscode.ExtensionContext,
   sholatName: string,
-  sholatTime: string
+  sholatTime: string,
+  callback: () => void
 ) {
   const panel = vscode.window.createWebviewPanel(
     "sholatNotification",
@@ -67,6 +68,7 @@ export async function showFullScreenAlert(
     panel.webview.onDidReceiveMessage((message) => {
       if (message.command === "close") {
         panel.dispose();
+        callback();
       }
     })
   );
