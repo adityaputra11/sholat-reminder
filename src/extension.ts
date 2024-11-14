@@ -7,7 +7,7 @@ import {
   ScheduleResponse,
 } from "./model/pray.model";
 import { PrayName } from "./constant/pray.constant";
-import { calculateCownDown, getTomorrowDate } from "./utils/time";
+import { calculateCountdown, getTomorrowDate } from "./utils/time";
 import { showFullScreenAlert } from "./utils/alert";
 import {
   getCityID,
@@ -158,7 +158,7 @@ export function activate(context: vscode.ExtensionContext) {
                 getSholatTime(today)
               );
             } else {
-              const cdTime = calculateCownDown(selisihWaktu);
+              const cdTime = calculateCountdown(selisihWaktu);
               const lokasiLabel = getIsShowCityName(context)
                 ? ` [${lokasi}]`
                 : "";
@@ -192,7 +192,7 @@ export function activate(context: vscode.ExtensionContext) {
                 () => getSholatTime(today)
               );
             } else {
-              const cdTime = calculateCownDown(selisihWaktu);
+              const cdTime = calculateCountdown(selisihWaktu);
               const lokasiLabel = getIsShowCityName(context)
                 ? ` [${lokasi}]`
                 : "";

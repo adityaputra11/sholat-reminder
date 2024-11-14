@@ -1,13 +1,20 @@
 type CountDownTime = {
-  hours: number;
-  minutes: number;
-  seconds: number;
+  hours: string;
+  minutes: string;
+  seconds: string;
 };
 
-export function calculateCownDown(selisihWaktu: number): CountDownTime {
-  const hours = Math.floor((selisihWaktu / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((selisihWaktu / (1000 * 60)) % 60);
-  const seconds = Math.floor((selisihWaktu / 1000) % 60);
+export function calculateCountdown(selisihWaktu: number): CountDownTime {
+  const hours = Math.floor((selisihWaktu / (1000 * 60 * 60)) % 24)
+    .toString()
+    .padStart(2, "0");
+  const minutes = Math.floor((selisihWaktu / (1000 * 60)) % 60)
+    .toString()
+    .padStart(2, "0");
+  const seconds = Math.floor((selisihWaktu / 1000) % 60)
+    .toString()
+    .padStart(2, "0");
+
   return {
     hours,
     minutes,
