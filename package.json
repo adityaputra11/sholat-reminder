@@ -4,7 +4,7 @@
   "icon": "media/icon.png",
   "license": "SEE LICENSE IN LICENSE.md",
   "description": "",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "Aditya Putra Pratama",
   "publisher": "AdityaPutraPratama",
   "engines": {
@@ -30,6 +30,10 @@
       {
         "command": "extension.searchCity",
         "title": "Sholat Reminder: Search City"
+      },
+      {
+        "command": "extension.toogleCityName",
+        "title": "Sholat Reminder: Toggle City Name"
       }
     ]
   },

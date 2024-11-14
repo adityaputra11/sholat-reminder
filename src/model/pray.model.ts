@@ -13,6 +13,7 @@ export type Schedule = {
 
 export type ScheduleResponse = {
   data: {
+    lokasi: string,
     jadwal: Schedule;
   };
 };
