@@ -3,6 +3,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
 ![Maintained](https://img.shields.io/badge/maintained-yes-green.svg)
+![Download](https://img.shields.io/visual-studio-marketplace/d/AdityaPutraPratama.sholat-reminder)
 
 
 **Sholat Reminder** adalah ekstensi Visual Studio Code yang menampilkan pengingat waktu sholat berdasarkan **City ID** yang ditentukan. Ekstensi ini akan menampilkan countdown menuju waktu sholat berikutnya langsung di dalam VSCode.
