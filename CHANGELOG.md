@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.12] - 2023-11-15
+
+- **Fix: Invalid Date after Subuh**
+
+## [1.0.11] - 2023-11-12
+
+- **Fix: Pad Number**
+
 ## [1.0.10] - 2023-11-12
 
 - **Refresh on close modal**
