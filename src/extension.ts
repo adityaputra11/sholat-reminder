@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage(
           `City ID ${cityID} berhasil disimpan.`
         );
-        getSholatTime(today);
+        getSholatTime(getToday());
       } else {
         vscode.window.showErrorMessage("City ID tidak valid.");
       }
@@ -62,7 +62,7 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.window.showInformationMessage(
               `City ${selection[0].label} save succesfully.`
             );
-            getSholatTime(today);
+            getSholatTime(getToday());
           }
           quickPick.hide();
         }
@@ -86,8 +86,11 @@ export function activate(context: vscode.ExtensionContext) {
   statusBar.show();
   context.subscriptions.push(statusBar);
 
-  const today = new Date().toISOString().split("T")[0];
   let interval: NodeJS.Timeout;
+
+  function getToday() {
+    return new Date().toISOString().split("T")[0];
+  }
 
   async function fetchSholatTime(date: string): Promise<Schedule> {
     try {
@@ -155,7 +158,7 @@ export function activate(context: vscode.ExtensionContext) {
                 `waktu sholat ${sholat.name} telah tiba (${sholat.time}).`
               );
               await showFullScreenAlert(context, sholat.name, sholat.time, () =>
-                getSholatTime(today)
+                getSholatTime(getToday())
               );
             } else {
               const cdTime = calculateCountdown(selisihWaktu);
@@ -189,7 +192,7 @@ export function activate(context: vscode.ExtensionContext) {
                 context,
                 PrayName.Subuh,
                 tomorrowSchedule.subuh,
-                () => getSholatTime(today)
+                () => getSholatTime(getToday())
               );
             } else {
               const cdTime = calculateCountdown(selisihWaktu);
@@ -208,7 +211,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   }
 
-  getSholatTime(today);
+  getSholatTime(getToday());
 }
 
 export function deactivate() {}
