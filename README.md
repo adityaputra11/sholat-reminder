@@ -1,7 +1,7 @@
 # Sholat Reminder
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.12-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.0.13-brightgreen.svg)
 ![Maintained](https://img.shields.io/badge/maintained-yes-green.svg)
 ![Download](https://img.shields.io/visual-studio-marketplace/d/AdityaPutraPratama.sholat-reminder)
 
