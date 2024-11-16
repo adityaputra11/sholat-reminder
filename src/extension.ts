@@ -21,8 +21,11 @@ import { searchCityCommand, setCityIDCommand } from "./commands/city.command";
 import { Command } from "./constant/command.constant";
 import { PrayService } from "./services/pray.service";
 import { Schedule } from "./model/pray.model";
+import { fetchAllCountry } from "./api/city.api";
 
 export function activate(context: vscode.ExtensionContext) {
+  fetchAllCountry();
+
   if (getIsShowCityName(context) === undefined) {
     saveIsShowCityName(context, true);
   }

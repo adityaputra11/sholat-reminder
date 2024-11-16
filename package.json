@@ -63,6 +63,7 @@
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "axios": "^1.7.7",
+    "country-state-city": "^3.2.1"
   }
 }
