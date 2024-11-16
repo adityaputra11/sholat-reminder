@@ -71,6 +71,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         if (prayTimeDate > nowDateTime) {
           handlePrayerCountdown(prayTimeDate, sholat, statusBar, lokasi);
+          break;
         }
         if (nowDateTime > prayTimeDate && sholat.name === PrayName.Isya) {
           handleTomorrowCountdown(
@@ -79,6 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
             statusBar,
             lokasi
           );
+          break;
         }
       }
     } catch (error) {
