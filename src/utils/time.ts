@@ -28,7 +28,10 @@ export function calculateCountdown(selisihWaktu: number): CountDownTime {
 export function getTomorrowDate(): [Date, string] {
   const newDate = new Date();
   newDate.setDate(newDate.getDate() + 1);
-  const stringDate = newDate.toISOString().split("T")[0];
+  const year = newDate.getFullYear();
+  const month = String(newDate.getMonth() + 1).padStart(2, "0");
+  const day = String(newDate.getDate()).padStart(2, "0");
+  const stringDate = `${year}-${month}-${day}`;
   return [newDate, stringDate];
 }
 
