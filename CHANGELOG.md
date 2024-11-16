@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.15] - 2023-11-15
+
+- **Bug Fix**
+
 ## [1.0.14] - 2023-11-15
 
 - **Feat: Add Refresh Option**
