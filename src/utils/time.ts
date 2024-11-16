@@ -1,5 +1,5 @@
 import { PrayName } from "../constant/pray.constant";
-import { Schedule } from "../model/pray.model";
+import { Schedule, ScheduleTiming } from "../model/pray.model";
 
 type CountDownTime = {
   hours: string;
@@ -44,6 +44,15 @@ export function getToday() {
   return currentDate;
 }
 
+export function getInternationalToday() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const currentDate = `${day}-${month}-${year}`;
+  return currentDate;
+}
+
 export function getPrayerTimes(schedule: Schedule) {
   return [
     { name: PrayName.Subuh, time: schedule.subuh },
@@ -61,4 +70,16 @@ export function getPrayerTimes(schedule: Schedule) {
  */
 export function parseTime(time: string): [number, number] {
   return time.split(":").map(Number) as [number, number];
+}
+
+export function convertScheduleTimingToSchedule(
+  timing: ScheduleTiming
+): Schedule {
+  return {
+    subuh: timing.Fajr,
+    dzuhur: timing.Dhuhr,
+    ashar: timing.Asr,
+    maghrib: timing.Maghrib,
+    isya: timing.Isha,
+  };
 }

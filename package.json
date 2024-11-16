@@ -24,12 +24,16 @@
   "contributes": {
     "commands": [
       {
+        "command": "extension.searchCity",
+        "title": "Sholat Reminder: Search Indonesian City"
+      },
+      {
         "command": "extension.setCityID",
         "title": "Sholat Reminder: Set City ID"
       },
       {
-        "command": "extension.searchCity",
-        "title": "Sholat Reminder: Search City"
+        "command": "extension.searchCountry",
+        "title": "Sholat Reminder: Search Country"
       },
       {
         "command": "extension.toogleCityName",
@@ -37,7 +41,7 @@
       },
       {
         "command": "extension.refreshSholatSchedule",
-        "title": "Sholat Reminder: Refresh Sholat Schedule"
+        "title": "Sholat Reminder: Refresh"
       }
     ]
   },
@@ -63,6 +67,7 @@
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "axios": "^1.7.7",
+    "country-state-city": "^3.2.1"
   }
 }

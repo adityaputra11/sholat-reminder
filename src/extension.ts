@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { PrayName } from "./constant/pray.constant";
 import {
   calculateCountdown,
+  getInternationalToday,
   getPrayerTimes,
   getToday,
   getTomorrowDate,
@@ -15,23 +16,39 @@ import {
 import {
   getCityName,
   getIsShowCityName,
+  getState,
   saveIsShowCityName,
 } from "./config/db";
-import { searchCityCommand, setCityIDCommand } from "./commands/city.command";
+import {
+  searchCityCommand,
+  searchCityStateCommand,
+  searchCountryCommand,
+  searchStateCommand,
+  setCityIDCommand,
+} from "./commands/city.command";
 import { Command } from "./constant/command.constant";
 import { PrayService } from "./services/pray.service";
 import { Schedule } from "./model/pray.model";
 
 export function activate(context: vscode.ExtensionContext) {
-  if (getIsShowCityName(context) === undefined) {
-    saveIsShowCityName(context, true);
-  }
+  // if (getIsShowCityName(context) === undefined) {
+  //   saveIsShowCityName(context, true);
+  // }
   context.subscriptions.push(
     vscode.commands.registerCommand(Command.SET_CITY_ID, () =>
       setCityIDCommand(context)
     ),
     vscode.commands.registerCommand(Command.SEARCH_CITY, async () =>
       searchCityCommand(context)
+    ),
+    vscode.commands.registerCommand(Command.SEARCH_COUNTRY, async () =>
+      searchCountryCommand(context)
+    ),
+    vscode.commands.registerCommand(Command.SEARCH_STATE, async () =>
+      searchStateCommand(context)
+    ),
+    vscode.commands.registerCommand(Command.SEARCH_CITY_STATE, async () =>
+      searchCityStateCommand(context)
     ),
     vscode.commands.registerCommand(Command.TOGGLE_CITY_NAME, async () => {
       saveIsShowCityName(context, !getIsShowCityName(context));
