@@ -10,6 +10,8 @@
 ## Fitur
 
 - **Set City ID**: Atur City ID untuk jadwal sholat di lokasi Anda.
+- **Search City**: Atur City untuk jadwal sholat di lokasi Anda.
+- **Set Country**: Atur Country untuk jadwal sholat di lokasi Anda (Khusus diluar indonesia).
 - **Status Bar Reminder**: Menampilkan countdown menuju waktu sholat berikutnya di status bar.
 - **Full-Screen Notification**: Memberikan notifikasi layar penuh saat waktu sholat tiba.
 - **Automatic Reload**: Mereload ekstensi secara otomatis setelah City ID diperbarui.
@@ -17,6 +19,10 @@
 ## Sumber API
 
 Ekstensi ini menggunakan [API myQuran](https://api.myquran.com/) untuk mendapatkan jadwal sholat. Jadwal diperbarui setiap kali Anda mengatur atau mengubah City ID, sehingga memastikan waktu sholat yang akurat sesuai lokasi Anda.
+
+#### NEW API
+
+Untuk Jadwal internasional menggunakan [API AlAdhan](https://aladhan.com/) untuk mendapatkan jadwal sholat. khusus diluar indonesia, Perlu dicatat bahwa metode perhitungan jadwal sholat yang digunakan mungkin tidak sepenuhnya akurat karena perbedaan dalam metode perhitungan waktu sholat di berbagai negara. Beberapa API internasional, seperti AlAdhan, menyediakan berbagai metode perhitungan yang dapat dipilih sesuai preferensi pengguna. Namun, hasil perhitungan mungkin tidak selalu sesuai dengan jadwal yang ditetapkan oleh otoritas lokal atau masjid setempat. Untuk informasi lebih lanjut mengenai metode perhitungan yang tersedia, Anda dapat mengunjungi situs AlAdhan
 
 ## Cara Mendapatkan City ID
 
@@ -33,29 +39,35 @@ Untuk menggunakan ekstensi ini, Anda memerlukan City ID yang sesuai dengan lokas
 
 ## Cara Menggunakan
 
-1. **Mengatur Berdasarkan City**:
+1. **Mengatur Berdasarkan Indonesia City**:
 
    - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
-   - Ketik `Sholat Reminder: Search City` dan pilih perintah tersebut.
+   - Ketik `Sholat Reminder: Search Indonesia City` dan pilih perintah tersebut.
    - Masukkan City sesuai lokasi Anda untuk menampilkan jadwal sholat yang sesuai.
 
-2. **Mengatur City ID**:
+2. **Mengatur Berdasarkan Country (Khusus di luar indonesia)**:
+
+   - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
+   - Ketik `Sholat Reminder: Search Country` dan pilih perintah tersebut.
+   - Masukkan Country sesuai lokasi Anda untuk menampilkan jadwal sholat yang sesuai.
+
+3. **Mengatur City ID**:
 
    - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
    - Ketik `Sholat Reminder: Set City ID` dan pilih perintah tersebut.
    - Masukkan City ID sesuai lokasi Anda untuk menampilkan jadwal sholat yang sesuai.
 
-3. **Menampilkan Pengingat Waktu Sholat**:
+4. **Menampilkan Pengingat Waktu Sholat**:
 
    - Ekstensi akan menampilkan waktu sholat berikutnya dalam bentuk countdown di status bar.
    - Ketika waktu sholat tiba, akan muncul notifikasi layar penuh di VSCode.
 
-4. **Merubah City ID**:
+5. **Merubah City ID**:
 
    - Jika Anda berpindah lokasi, Anda dapat mengubah City ID dengan perintah yang sama di Command Palette.
    - Setelah City ID berhasil diperbarui, VSCode akan otomatis reload untuk menerapkan perubahan.
 
-5. **Menampilkan/Menyembunyikan City Name**:
+6. **Menampilkan/Menyembunyikan City Name**:
    - Buka Command Palette (tekan `Ctrl+Shift+P` atau `Cmd+Shift+P` di Mac).
    - Ketik `Sholat Reminder: Toogle City Name` dan pilih perintah tersebut.
    - Maka City Name pada Status Bar akan tampil/hilang sesuai kebutuhan Anda.

@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.0] - 2023-11-15
+
+- **Support International Time**
+
 ## [1.0.15] - 2023-11-15
 
 - **Bug Fix**

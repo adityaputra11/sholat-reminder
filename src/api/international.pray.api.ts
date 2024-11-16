@@ -9,7 +9,7 @@ export async function fetchInternationalSholatTime(
   latitude: string,
   longitude: string
 ) {
-  const url = `${baseUrl}/${version}/timings/${date}?latitude=${latitude}&longitude=${longitude}&method=2`;
+  const url = `${baseUrl}/${version}/timings/${date}?latitude=${latitude}&longitude=${longitude}`;
   const response = await axios.get<ScheduleInternationalResponse>(url);
   return response.data.data;
 }
