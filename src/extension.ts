@@ -1,80 +1,43 @@
 import * as vscode from "vscode";
-import axios from "axios";
-import {
-  LocationPray,
-  LocationResponse,
-  Schedule,
-  ScheduleResponse,
-} from "./model/pray.model";
 import { PrayName } from "./constant/pray.constant";
-import { calculateCountdown, getTomorrowDate } from "./utils/time";
-import { showFullScreenAlert } from "./utils/alert";
 import {
-  getCityID,
-  saveCityID,
+  calculateCountdown,
+  getPrayerTimes,
+  getToday,
+  getTomorrowDate,
+  parseTime,
+} from "./utils/time";
+import {
+  buildStatusBar,
+  generatePrayerTooltip,
+  showFullScreenAlert,
+} from "./utils/alert";
+import {
   getCityName,
-  saveCityName,
   getIsShowCityName,
   saveIsShowCityName,
 } from "./config/db";
-import { convertToQuickPickItems } from "./utils/location";
-
-const baseUrl = "https://api.myquran.com";
-const version = "v2";
+import { searchCityCommand, setCityIDCommand } from "./commands/city.command";
+import { Command } from "./constant/command.constant";
+import { PrayService } from "./services/pray.service";
+import { Schedule } from "./model/pray.model";
 
 export function activate(context: vscode.ExtensionContext) {
   if (getIsShowCityName(context) === undefined) {
     saveIsShowCityName(context, true);
   }
   context.subscriptions.push(
-    vscode.commands.registerCommand("extension.setCityID", async () => {
-      const cityID = await vscode.window.showInputBox({
-        placeHolder: "Masukkan City ID untuk jadwal sholat",
-        prompt: "City ID",
-      });
-
-      const quickPick = vscode.window.createQuickPick();
-      quickPick.placeholder = "Pilih atau cari opsi...";
-
-      if (cityID) {
-        saveCityID(context, cityID);
-        vscode.window.showInformationMessage(
-          `City ID ${cityID} berhasil disimpan.`
-        );
-        getSholatTime(getToday());
-      } else {
-        vscode.window.showErrorMessage("City ID tidak valid.");
-      }
-    }),
-    vscode.commands.registerCommand("extension.searchCity", async () => {
-      const quickPick = vscode.window.createQuickPick();
-      quickPick.placeholder = "Choose city ...";
-
-      const data = await fetchCity();
-      const items = convertToQuickPickItems(data);
-
-      quickPick.items = items;
-
-      quickPick.onDidChangeSelection((selection) => {
-        if (selection[0]) {
-          if (selection[0].detail) {
-            saveCityID(context, selection[0].detail);
-            vscode.window.showInformationMessage(
-              `City ${selection[0].label} save succesfully.`
-            );
-            getSholatTime(getToday());
-          }
-          quickPick.hide();
-        }
-      });
-
-      // Event ketika dropdown dibatalkan
-      quickPick.onDidHide(() => quickPick.dispose());
-
-      quickPick.show();
-    }),
-    vscode.commands.registerCommand("extension.toogleCityName", async () => {
+    vscode.commands.registerCommand(Command.SET_CITY_ID, () =>
+      setCityIDCommand(context)
+    ),
+    vscode.commands.registerCommand(Command.SEARCH_CITY, async () =>
+      searchCityCommand(context)
+    ),
+    vscode.commands.registerCommand(Command.TOGGLE_CITY_NAME, async () => {
       saveIsShowCityName(context, !getIsShowCityName(context));
+    }),
+    vscode.commands.registerCommand(Command.REFRESH, async () => {
+      getSholatTime(getToday());
     })
   );
 
@@ -88,132 +51,111 @@ export function activate(context: vscode.ExtensionContext) {
 
   let interval: NodeJS.Timeout;
 
-  function getToday() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const currentDate = `${year}-${month}-${day}`;
-    return currentDate;
-  }
-
-  async function fetchSholatTime(date: string): Promise<Schedule> {
-    try {
-      const localCityID = getCityID(context);
-      const cityID = localCityID || "1301";
-      const url = `${baseUrl}/${version}/sholat/jadwal/${cityID}/${date}`;
-      const response = await axios.get<ScheduleResponse>(url);
-      saveCityName(context, response.data.data.lokasi);
-      return response.data.data.jadwal;
-    } catch (error) {
-      console.error("Error fetching sholat time:", error);
-      throw new Error("Gagal mengambil jadwal sholat.");
-    }
-  }
-
-  async function fetchCity(): Promise<LocationResponse> {
-    try {
-      const url = `${baseUrl}/${version}/sholat/kota/semua`;
-      const response = await axios.get<LocationResponse>(url);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching sholat time:", error);
-      throw new Error("Gagal mengambil jadwal sholat.");
-    }
-  }
-
   async function getSholatTime(date: string) {
     try {
       statusBar.text = "Jadwal sholat berhasil diambil.";
-      const schedule = await fetchSholatTime(date);
+      const service = new PrayService(context);
+      const schedule = await service.getSchedule(date);
       const lokasi = getCityName(context);
       const nowDateTime = new Date();
-      const prayTime = [
-        { name: PrayName.Subuh, time: schedule.subuh },
-        { name: PrayName.Dzuhur, time: schedule.dzuhur },
-        { name: PrayName.Ashar, time: schedule.ashar },
-        { name: PrayName.Maghrib, time: schedule.maghrib },
-        { name: PrayName.Isya, time: schedule.isya },
-      ];
-
-      const markdownTooltip = new vscode.MarkdownString(
-        `**Sholat**       **Waktu**  
-         **${PrayName.Subuh}**:      ${schedule.subuh}  
-         **${PrayName.Dzuhur}**:     ${schedule.dzuhur}  
-         **${PrayName.Ashar}**:      ${schedule.ashar}  
-         **${PrayName.Maghrib}**:    ${schedule.maghrib}  
-         **${PrayName.Isya}**:       ${schedule.isya}`
-      );
+      //Generate Pray Time
+      const prayTime = getPrayerTimes(schedule);
+      const markdownTooltip = generatePrayerTooltip(schedule);
 
       statusBar.tooltip = markdownTooltip;
 
       for (const sholat of prayTime) {
-        const [hours, minutes] = sholat.time.split(":").map(Number);
+        const [hours, minutes] = parseTime(sholat.time);
         const prayTimeDate = new Date();
         prayTimeDate.setHours(hours, minutes, 0, 0);
 
         if (prayTimeDate > nowDateTime) {
-          clearInterval(interval);
-          interval = setInterval(async () => {
-            const now = new Date();
-            const selisihWaktu = prayTimeDate.getTime() - now.getTime();
-            if (selisihWaktu <= 0) {
-              clearInterval(interval);
-              vscode.window.showInformationMessage(
-                `waktu sholat ${sholat.name} telah tiba (${sholat.time}).`
-              );
-              await showFullScreenAlert(context, sholat.name, sholat.time, () =>
-                getSholatTime(getToday())
-              );
-            } else {
-              const cdTime = calculateCountdown(selisihWaktu);
-              const lokasiLabel = getIsShowCityName(context)
-                ? ` [${lokasi}]`
-                : "";
-              statusBar.text = `$(zap) ${sholat.name}(${sholat.time}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}${lokasiLabel}`;
-            }
-          }, 1000);
-          break;
+          handlePrayerCountdown(prayTimeDate, sholat, statusBar, lokasi);
         }
         if (nowDateTime > prayTimeDate && sholat.name === PrayName.Isya) {
-          clearInterval(interval);
-
-          const [tommorowDate, tommorowString] = getTomorrowDate();
-          const tomorrowSchedule = await fetchSholatTime(tommorowString);
-
-          interval = setInterval(async () => {
-            const now = new Date();
-            const [subuhHours, subuhMinutes] = tomorrowSchedule.subuh
-              .split(":")
-              .map(Number);
-            tommorowDate.setHours(subuhHours, subuhMinutes, 0, 0);
-            const selisihWaktu = tommorowDate.getTime() - now.getTime();
-            if (selisihWaktu <= 0) {
-              clearInterval(interval);
-              vscode.window.showInformationMessage(
-                `waktu sholat ${PrayName.Subuh} telah tiba (${tomorrowSchedule.subuh}).`
-              );
-              await showFullScreenAlert(
-                context,
-                PrayName.Subuh,
-                tomorrowSchedule.subuh,
-                () => getSholatTime(getToday())
-              );
-            } else {
-              const cdTime = calculateCountdown(selisihWaktu);
-              const lokasiLabel = getIsShowCityName(context)
-                ? ` [${lokasi}]`
-                : "";
-              statusBar.text = `$(zap) ${PrayName.Subuh}(${tomorrowSchedule.subuh}):-${cdTime.hours}:${cdTime.minutes}:${cdTime.seconds}${lokasiLabel}`;
-            }
-          }, 1000);
-          break;
+          handleTomorrowCountdown(
+            getTomorrowDate()[0],
+            schedule,
+            statusBar,
+            lokasi
+          );
         }
       }
     } catch (error) {
       vscode.window.showErrorMessage("Gagal mengambil jadwal sholat.");
       console.error(error);
     }
+  }
+  async function handlePrayerCountdown(
+    prayTimeDate: Date,
+    sholat: { name: string; time: string },
+    statusBar: vscode.StatusBarItem,
+    lokasi: string | undefined
+  ) {
+    clearInterval(interval);
+
+    interval = setInterval(async () => {
+      const now = new Date();
+      const remainingTime = prayTimeDate.getTime() - now.getTime();
+
+      if (remainingTime <= 0) {
+        clearInterval(interval);
+        vscode.window.showInformationMessage(
+          `Waktu sholat ${sholat.name} telah tiba (${sholat.time}).`
+        );
+        await showFullScreenAlert(context, sholat.name, sholat.time, () =>
+          getSholatTime(getToday())
+        );
+      } else {
+        statusBar.text = buildStatusBar(
+          context,
+          sholat.name,
+          sholat.time,
+          calculateCountdown(remainingTime),
+          lokasi
+        );
+      }
+    }, 1000);
+  }
+
+  async function handleTomorrowCountdown(
+    tommorowDate: Date,
+    tomorrowSchedule: Schedule,
+    statusBar: vscode.StatusBarItem,
+    lokasi: string | undefined
+  ) {
+    clearInterval(interval);
+
+    interval = setInterval(async () => {
+      const now = new Date();
+      const [subuhHours, subuhMinutes] = tomorrowSchedule.subuh
+        .split(":")
+        .map(Number);
+      tommorowDate.setHours(subuhHours, subuhMinutes, 0, 0);
+      const remainingTime = tommorowDate.getTime() - now.getTime();
+
+      if (remainingTime <= 0) {
+        clearInterval(interval);
+        vscode.window.showInformationMessage(
+          `Waktu sholat ${PrayName.Subuh} telah tiba (${tomorrowSchedule.subuh}).`
+        );
+        await showFullScreenAlert(
+          context,
+          PrayName.Subuh,
+          tomorrowSchedule.subuh,
+          () => getSholatTime(getToday())
+        );
+      } else {
+        const countdown = calculateCountdown(remainingTime);
+        statusBar.text = buildStatusBar(
+          context,
+          PrayName.Subuh,
+          tomorrowSchedule.subuh,
+          calculateCountdown(remainingTime),
+          lokasi
+        );
+      }
+    }, 1000);
   }
 
   getSholatTime(getToday());

@@ -1,5 +1,8 @@
 import * as vscode from "vscode";
 import { QuoteSholat } from "../constant/quote.constant";
+import { Schedule } from "../model/pray.model";
+import { PrayName } from "../constant/pray.constant";
+import { getIsShowCityName } from "../config/db";
 
 function randomQuote<T>(array: T[]): T {
   const indeksAcak = Math.floor(Math.random() * array.length);
@@ -86,4 +89,37 @@ export async function showFullScreenAlert(
       }
     })
   );
+}
+
+export function generatePrayerTooltip(
+  schedule: Schedule
+): vscode.MarkdownString {
+  return new vscode.MarkdownString(
+    `**Sholat**       **Waktu**  
+     **${PrayName.Subuh}**:      ${schedule.subuh}  
+     **${PrayName.Dzuhur}**:     ${schedule.dzuhur}  
+     **${PrayName.Ashar}**:      ${schedule.ashar}  
+     **${PrayName.Maghrib}**:    ${schedule.maghrib}  
+     **${PrayName.Isya}**:       ${schedule.isya}`
+  );
+}
+
+/**
+ * Update the status bar text for a prayer time.
+ * @param statusBar The status bar item to update
+ * @param sholatName Name of the prayer
+ * @param sholatTime Time of the prayer
+ * @param countdown Countdown object {hours, minutes, seconds}
+ * @param lokasi Optional location label
+ */
+export function buildStatusBar(
+  context: vscode.ExtensionContext,
+  sholatName: string,
+  sholatTime: string,
+  countdown: { hours: string; minutes: string; seconds: string },
+  lokasi?: string
+) {
+  const isShhowCityName = getIsShowCityName(context);
+  const lokasiLabel = isShhowCityName && lokasi ? ` [${lokasi}]` : "";
+  return `$(zap) ${sholatName}(${sholatTime}):-${countdown.hours}:${countdown.minutes}:${countdown.seconds}${lokasiLabel}`;
 }
