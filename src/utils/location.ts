@@ -4,6 +4,7 @@ import {
   LocationPray,
   LocationResponse,
 } from "../model/pray.model";
+import { ICountry } from "country-state-city";
 
 export function convertToQuickPickItems(
   data: LocationResponse
@@ -11,6 +12,12 @@ export function convertToQuickPickItems(
   return data.data.map((location: LocationPray) => ({
     label: location.lokasi,
     detail: location.id,
-    description: `ID: ${location.id}`,
+  }));
+}
+
+export function buildCountryPickItem(data: ICountry[]): vscode.QuickPickItem[] {
+  return data.map((item: ICountry) => ({
+    label: item.name,
+    detail: item.isoCode,
   }));
 }
