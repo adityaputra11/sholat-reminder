@@ -85,9 +85,16 @@ export async function showFullScreenAlert(
     panel.webview.onDidReceiveMessage((message) => {
       if (message.command === "close") {
         panel.dispose();
-        callback();
       }
     })
+  );
+
+  panel.onDidDispose(
+    () => {
+      callback();
+    },
+    null,
+    context.subscriptions
   );
 }
 
