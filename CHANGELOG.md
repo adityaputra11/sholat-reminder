@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.1] - 2023-11-22
+
+- **Fix: Extensions stop working when panel disposed via close tab**
+
 ## [1.1.0] - 2023-11-15
 
 - **Support International Time**
