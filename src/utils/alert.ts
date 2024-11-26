@@ -3,10 +3,18 @@ import { QuoteSholat } from "../constant/quote.constant";
 import { Schedule } from "../model/pray.model";
 import { PrayName } from "../constant/pray.constant";
 import { getIsShowCityName } from "../config/db";
+import { fetchQuotes } from "../api/quote.api";
+import { Quote } from "../model/quote.model";
 
 function randomQuote<T>(array: T[]): T {
-  const indeksAcak = Math.floor(Math.random() * array.length);
-  return array[indeksAcak];
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
+
+async function randomQuoteFromApi(): Promise<Quote> {
+  const data = await fetchQuotes();
+  const randomIndex = Math.floor(Math.random() * data.length);
+  return data[randomIndex];
 }
 
 export async function showFullScreenAlert(
@@ -22,7 +30,7 @@ export async function showFullScreenAlert(
     { enableScripts: true }
   );
 
-  const quote = randomQuote(QuoteSholat);
+  const quote = await randomQuoteFromApi();
 
   panel.webview.html = `
       <!DOCTYPE html>
@@ -67,8 +75,8 @@ export async function showFullScreenAlert(
         <div>
           <h1>Waktu Sholat ${sholatName}</h1>
           <p>Telah tiba pada pukul ${sholatTime}</p>
-            <q>${quote.quote}</q>
-            <h2>${quote.source}</h2>
+            <q>${quote.content}</q>
+            <h2>${quote.author}</h2>
           <button onclick="closePanel()">Tutup</button>
         </div>
         <script>

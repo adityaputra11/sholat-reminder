@@ -69,6 +69,9 @@ export function activate(context: vscode.ExtensionContext) {
   let interval: NodeJS.Timeout;
 
   async function getSholatTime(date: string) {
+    await showFullScreenAlert(context, "sholat.name", "sholat.time", () =>
+      getSholatTime(getToday())
+    );
     try {
       statusBar.text = "Jadwal sholat berhasil diambil.";
       const service = new PrayService(context);
