@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.2] - 2023-11-22
+
+- **Fix: Crash**
+
 ## [1.1.1] - 2023-11-22
 
 - **Fix: Extensions stop working when panel disposed via close tab**
