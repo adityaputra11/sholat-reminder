@@ -3,9 +3,9 @@ import { Quote, QuoteResponse } from "../model/quote.model";
 
 const baseUrl = "https://sholat-reminder.up.railway.app/api";
 const version = "v1";
-export async function fetchQuotes(): Promise<Quote[]> {
+export async function fetchRandomQuote(): Promise<Quote | undefined> {
   try {
-    const url = `${baseUrl}/${version}/quotes`;
+    const url = `${baseUrl}/${version}/quotes/random`;
 
     // Tambahkan konfigurasi header
     const headers = {
@@ -13,10 +13,9 @@ export async function fetchQuotes(): Promise<Quote[]> {
       "x-api-key": "c2hvbGF0cmVtaW5kZXI0NTM1",
     };
 
-    const response = await axios.get<Quote[]>(url, { headers });
-    return response.data;
+    const response = await axios.get<QuoteResponse>(url, { headers });
+    return response.data.data;
   } catch (error) {
-    const resp: QuoteResponse = { data: [] };
-    return resp.data;
+    return undefined;
   }
 }

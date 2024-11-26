@@ -2,7 +2,6 @@ import * as vscode from "vscode";
 import { PrayName } from "./constant/pray.constant";
 import {
   calculateCountdown,
-  getInternationalToday,
   getPrayerTimes,
   getToday,
   getTomorrowDate,
@@ -16,7 +15,6 @@ import {
 import {
   getCityName,
   getIsShowCityName,
-  getState,
   saveIsShowCityName,
 } from "./config/db";
 import {
@@ -31,9 +29,9 @@ import { PrayService } from "./services/pray.service";
 import { Schedule } from "./model/pray.model";
 
 export function activate(context: vscode.ExtensionContext) {
-  // if (getIsShowCityName(context) === undefined) {
-  //   saveIsShowCityName(context, true);
-  // }
+  if (getIsShowCityName(context) === undefined) {
+    saveIsShowCityName(context, true);
+  }
   context.subscriptions.push(
     vscode.commands.registerCommand(Command.SET_CITY_ID, () =>
       setCityIDCommand(context)
@@ -69,9 +67,6 @@ export function activate(context: vscode.ExtensionContext) {
   let interval: NodeJS.Timeout;
 
   async function getSholatTime(date: string) {
-    await showFullScreenAlert(context, "sholat.name", "sholat.time", () =>
-      getSholatTime(getToday())
-    );
     try {
       statusBar.text = "Jadwal sholat berhasil diambil.";
       const service = new PrayService(context);

@@ -3,7 +3,7 @@ import { QuoteSholat } from "../constant/quote.constant";
 import { Schedule } from "../model/pray.model";
 import { PrayName } from "../constant/pray.constant";
 import { getIsShowCityName } from "../config/db";
-import { fetchQuotes } from "../api/quote.api";
+import { fetchRandomQuote } from "../api/quote.api";
 import { Quote } from "../model/quote.model";
 
 function randomQuote<T>(array: T[]): T {
@@ -12,9 +12,11 @@ function randomQuote<T>(array: T[]): T {
 }
 
 async function randomQuoteFromApi(): Promise<Quote> {
-  const data = await fetchQuotes();
-  const randomIndex = Math.floor(Math.random() * data.length);
-  return data[randomIndex];
+  const quote = await fetchRandomQuote();
+  if (!quote) {
+    return randomQuote(QuoteSholat);
+  }
+  return quote;
 }
 
 export async function showFullScreenAlert(

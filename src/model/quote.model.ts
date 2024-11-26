@@ -4,6 +4,10 @@ export type Quote = {
   author: string;
 };
 
-export type QuoteResponse = {
+export type QuotesResponse = {
   data: Quote[];
+};
+
+export type QuoteResponse = {
+  data: Quote;
 };
