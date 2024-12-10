@@ -1,5 +1,5 @@
 import { PrayName } from "../constant/pray.constant";
-import { Schedule, ScheduleTiming } from "../model/pray.model";
+import { Schedule, SchedulePrayer, ScheduleTiming } from "../model/pray.model";
 
 type CountDownTime = {
   hours: string;
@@ -82,4 +82,26 @@ export function convertScheduleTimingToSchedule(
     maghrib: timing.Maghrib,
     isya: timing.Isha,
   };
+}
+
+export function convertSchedulePrayerToSchedule(
+  timing: SchedulePrayer
+): Schedule {
+  return {
+    subuh: secondToTimeText(timing.fajr),
+    dzuhur: secondToTimeText(timing.dhuhr),
+    ashar: secondToTimeText(timing.asr),
+    maghrib: secondToTimeText(timing.maghrib),
+    isya: secondToTimeText(timing.isha),
+  };
+}
+
+function secondToTimeText(n: number): string {
+  const date = new Date(n*1000);
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    minute: "2-digit",
+    hour: "2-digit",
+    hour12: false,
+  });
+  return formatter.format(date);
 }
