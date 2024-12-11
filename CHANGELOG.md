@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.5] - 2023-11-26
+## [1.1.6] - 2023-11-26
 
 - **Chore: Downgrade Vscode Engine**
 

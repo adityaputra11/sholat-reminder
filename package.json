@@ -4,11 +4,11 @@
   "icon": "media/icon.png",
   "license": "SEE LICENSE IN LICENSE.md",
   "description": "",
-  "version": "1.1.5",
+  "version": "6",
   "author": "Aditya Putra Pratama",
   "publisher": "AdityaPutraPratama",
   "engines": {
-    "vscode": "1.92.0"
+    "vscode": "^1.92.0"
   },
   "repository": {
     "type": "git",
@@ -57,7 +57,7 @@
     "@types/jest": "^29.5.14",
     "@types/mocha": "^10.0.9",
     "@types/node": "^20.17.6",
-    "@types/vscode": "1.92.0",
+    "@types/vscode": "^1.92.0",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
     "@typescript-eslint/parser": "^8.7.0",
     "@vscode/test-cli": "^0.0.10",
