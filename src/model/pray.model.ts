@@ -50,3 +50,26 @@ export type LocationResponse = {
 export type LocationObj = {
   [key: string]: string;
 };
+
+
+export type ScheduleMalaysiaResponse = {
+  zone: string,
+  year: string,
+  month: string,
+  last_updated: string,
+  prayers: Array<SchedulePrayer>;
+};
+
+export type SchedulePrayer = {
+  hijri: string,
+  day: number,
+  fajr: number,
+  syuruk: number,
+  dhuhr: number,
+  asr: number,
+  maghrib: number,
+  isha: number
+}
+
+
+
