@@ -1,7 +1,7 @@
 # Sholat Reminder
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.1.3-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.1.4-brightgreen.svg)
 ![Maintained](https://img.shields.io/badge/maintained-yes-green.svg)
 ![Download](https://img.shields.io/visual-studio-marketplace/d/AdityaPutraPratama.sholat-reminder)
 
@@ -20,9 +20,15 @@
 
 Ekstensi ini menggunakan [API myQuran](https://api.myquran.com/) untuk mendapatkan jadwal sholat. Jadwal diperbarui setiap kali Anda mengatur atau mengubah City ID, sehingga memastikan waktu sholat yang akurat sesuai lokasi Anda.
 
-#### NEW API
+#### International API
 
 Untuk Jadwal internasional menggunakan [API AlAdhan](https://aladhan.com/) untuk mendapatkan jadwal sholat. khusus diluar indonesia, Perlu dicatat bahwa metode perhitungan jadwal sholat yang digunakan mungkin tidak sepenuhnya akurat karena perbedaan dalam metode perhitungan waktu sholat di berbagai negara. Beberapa API internasional, seperti AlAdhan, menyediakan berbagai metode perhitungan yang dapat dipilih sesuai preferensi pengguna. Namun, hasil perhitungan mungkin tidak selalu sesuai dengan jadwal yang ditetapkan oleh otoritas lokal atau masjid setempat. Untuk informasi lebih lanjut mengenai metode perhitungan yang tersedia, Anda dapat mengunjungi situs AlAdhan
+
+#### New Malaysia API
+
+Untuk Jadwal malaysia menggunakan [Waktu sholat](https://api.waktusolat.app) untuk mendapatkan jadwal sholat. The Malaysia Waktu Solat API provides accurate prayer times (waktu solat) for various locations in Malaysia. It offers information on monthly prayer timings, zone detection based on coordinates and more.
+
+Malaysia Waktu Solat API menyediakan data waktu solat yang tepat untuk kesemua tempat di Malaysia. Kami menyediakan maklumat seperti waktu solat bulanan, pengesanan zon berdasarkan koordinat dan lain-lain.
 
 ## Cara Mendapatkan City ID
 
