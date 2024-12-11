@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.4] - 2023-11-26
+
+- **Feat: Support Malaysian Time**
+
 ## [1.1.3] - 2023-11-26
 
 - **Feat: Dynamic Quote**
