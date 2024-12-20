@@ -16,6 +16,7 @@ import {
   getCityName,
   getIsShowCityName,
   saveIsShowCityName,
+  getReminderBeforePray,
 } from "./config/db";
 import {
   searchCityCommand,
@@ -24,6 +25,7 @@ import {
   searchStateCommand,
   setCityIDCommand,
 } from "./commands/city.command";
+import { setReminderBeforePrayCommand } from "./commands/reminder.command";
 import { Command } from "./constant/command.constant";
 import { PrayService } from "./services/pray.service";
 import { Schedule } from "./model/pray.model";
@@ -53,7 +55,13 @@ export function activate(context: vscode.ExtensionContext) {
     }),
     vscode.commands.registerCommand(Command.REFRESH, async () => {
       getSholatTime(getToday());
-    })
+    }),
+    vscode.commands.registerCommand(
+      Command.SET_REMINDER_BEFORE_PRAY,
+      async () => {
+        setReminderBeforePrayCommand(context);
+      }
+    )
   );
 
   const statusBar = vscode.window.createStatusBarItem(
@@ -110,10 +118,26 @@ export function activate(context: vscode.ExtensionContext) {
     lokasi: string | undefined
   ) {
     clearInterval(interval);
+    let reminderShown = false;
+    const reminderMinutes = getReminderBeforePray(context);
 
     interval = setInterval(async () => {
       const now = new Date();
       const remainingTime = prayTimeDate.getTime() - now.getTime();
+      const remainingMinutes = Math.ceil(remainingTime / (1000 * 60));
+
+      // Check for reminder
+      if (
+        reminderMinutes > 0 &&
+        remainingMinutes === reminderMinutes &&
+        !reminderShown &&
+        remainingTime > 0
+      ) {
+        reminderShown = true;
+        vscode.window.showInformationMessage(
+          `${sholat.name} prayer time in ${reminderMinutes} minutes (${sholat.time})`
+        );
+      }
 
       if (remainingTime <= 0) {
         clearInterval(interval);
@@ -142,6 +166,8 @@ export function activate(context: vscode.ExtensionContext) {
     lokasi: string | undefined
   ) {
     clearInterval(interval);
+    let reminderShown = false;
+    const reminderMinutes = getReminderBeforePray(context);
 
     interval = setInterval(async () => {
       const now = new Date();
@@ -150,6 +176,20 @@ export function activate(context: vscode.ExtensionContext) {
         .map(Number);
       tommorowDate.setHours(subuhHours, subuhMinutes, 0, 0);
       const remainingTime = tommorowDate.getTime() - now.getTime();
+      const remainingMinutes = Math.ceil(remainingTime / (1000 * 60));
+
+      // Check for reminder
+      if (
+        reminderMinutes > 0 &&
+        remainingMinutes === reminderMinutes &&
+        !reminderShown &&
+        remainingTime > 0
+      ) {
+        reminderShown = true;
+        vscode.window.showInformationMessage(
+          `${PrayName.Subuh} prayer time in ${reminderMinutes} minutes (${tomorrowSchedule.subuh})`
+        );
+      }
 
       if (remainingTime <= 0) {
         clearInterval(interval);
@@ -163,7 +203,6 @@ export function activate(context: vscode.ExtensionContext) {
           () => getSholatTime(getToday())
         );
       } else {
-        const countdown = calculateCountdown(remainingTime);
         statusBar.text = buildStatusBar(
           context,
           PrayName.Subuh,
