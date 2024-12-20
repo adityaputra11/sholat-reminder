@@ -94,3 +94,16 @@ export function getCityState(
 ): CityState | undefined {
   return context.globalState.get<State>("state");
 }
+
+export function getReminderBeforePray(
+  context: vscode.ExtensionContext
+): number {
+  return context.globalState.get("reminderMinutes", 0); // default to 0 (no reminder)
+}
+
+export function setReminderBeforePray(
+  context: vscode.ExtensionContext,
+  minutes: number
+) {
+  context.globalState.update("reminderMinutes", minutes);
+}

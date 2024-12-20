@@ -6,4 +6,5 @@ export const Command = {
   SEARCH_CITY: "extension.searchCity",
   TOGGLE_CITY_NAME: "extension.toogleCityName",
   REFRESH: "extension.refreshSholatSchedule",
+  SET_REMINDER_BEFORE_PRAY: "extension.setReminderBeforePray",
 };

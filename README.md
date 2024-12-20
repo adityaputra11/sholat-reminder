@@ -15,6 +15,7 @@
 - **Status Bar Reminder**: Menampilkan countdown menuju waktu sholat berikutnya di status bar.
 - **Full-Screen Notification**: Memberikan notifikasi layar penuh saat waktu sholat tiba.
 - **Automatic Reload**: Mereload ekstensi secara otomatis setelah City ID diperbarui.
+- **Set Reminder Before Pray**: Atur waktu pengingat sebelum waktu sholat tiba.
 
 ## Sumber API
 

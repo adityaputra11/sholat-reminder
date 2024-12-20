@@ -42,6 +42,10 @@
       {
         "command": "extension.refreshSholatSchedule",
         "title": "Sholat Reminder: Refresh"
+      },
+      {
+        "command": "extension.setReminderBeforePray",
+        "title": "Sholat Reminder: Set Reminder Before Pray"
       }
     ]
   },
