@@ -2,6 +2,10 @@
 
 ## [1.1.6] - 2023-11-26
 
+- **Feat: Reminder before pray time**
+
+## [1.1.6] - 2023-11-26
+
 - **Chore: Downgrade Vscode Engine**
 
 ## [1.1.4] - 2023-11-26
