@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.8] - 2024-12-26
+
+- **Chore: Improvement**
+
 ## [1.1.7] - 2024-12-26
 
 - **Feat: Reminder before pray time**
