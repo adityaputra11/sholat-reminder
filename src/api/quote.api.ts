@@ -10,7 +10,7 @@ export async function fetchRandomQuote(): Promise<Quote | undefined> {
     // Tambahkan konfigurasi header
     const headers = {
       "Content-Type": "application/json",
-      "x-api-key": "c2hvbGF0cmVtaW5kZXI0NTM1",
+      "x-api-key": "=c2hvbGF0cmVtaW5kZXI0NTM1",
     };
 
     const response = await axios.get<QuoteResponse>(url, { headers });
