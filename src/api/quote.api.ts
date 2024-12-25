@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Quote, QuoteResponse } from "../model/quote.model";
 
-const baseUrl = "https://sholat-reminder.up.railway.app/api";
+const baseUrl = "https://sholatreminder.pro/api";
 const version = "v1";
 export async function fetchRandomQuote(): Promise<Quote | undefined> {
   try {
