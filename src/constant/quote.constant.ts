@@ -103,4 +103,14 @@ export const QuoteSholat: Quote[] = [
     Referensi : https://almanhaj.or.id/12057-syarah-hadits-jibril-tentang-islam-iman-dan-ihsan.html`,
     id: 0,
   },
+  {
+    author: "HR Tirmidzi No.413 dan HR An-Nasa'i No.466",
+    content: `Dari Abu Hurairah radhiyallahu 'anhu, Rasulullah shalallahu 'alaihi wa sallam bersabda yang artinya "Sesungguhnya amal yang pertama kali dihisab pada seorang hamba pada hari kiamat adalah shalatnya. Maka, jika shalatnya baik, sungguh ia telah beruntung dan berhasil. Dan jika shalatnya rusak, sungguh ia telah gagal dan rugi. Jika berkurang sedikit dari shalat wajibnya, maka Allah Ta'ala berfirman, "Lihatlah apakah hamba-Ku memiliki shalat sunnah." Maka disempurnakanlah apa yang kurang dengan seluruh amalnya`,
+    id: 0
+  },
+  {
+    author: "Surah Al-Mudatstsir:42-43",
+    content: `"Apakah yang memasukkan kamu ke dalam Saqar (neraka)?" Mereka menjawab: "Kami dahulu tidak termasuk orang-orang yang mengerjakan shalat"`,
+    id: 0
+  }
 ];
