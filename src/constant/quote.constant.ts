@@ -80,4 +80,37 @@ export const QuoteSholat: Quote[] = [
       "Ada dua hal yang jika keduanya baik pada diri seorang hamba, akan baik pula selainnya. Dua hal tersebut adalah salatnya dan lisannya.",
     id: 0,
   },
+  {
+    author: "HR. Muslim, no. 612, 173",
+    content: `Dari ‘Abdullah bin ‘Amr radhiyallahu ‘anhuma, Nabi shallallahu ‘alaihi wa sallam bersabda, “Waktu Zhuhur dimulai sejak matahari sudah tergelincir sampai bayang-bayang seseorang sama dengan tingginya selama belum masuk waktu Ashar. Waktu shalat Ashar selama matahari cahayanya belum menguning. Waktu shalat Maghrib selama syafaq (cahaya merah) belum hilang. Waktu shalat Isya’ hingga pertengahan malam dan waktu shalat Shubuh dimulai dari terbitnya fajar sampai terbitnya matahari
+
+    Sumber https://rumaysho.com/19315-bulughul-maram-shalat-waktu-shalat-yang-lima-waktu.html`,
+    id: 0,
+  },
+  {
+    author: `Shahiih: [Shahiih Sunan an-Nasa-i (no. 497)], Shahiih al-Bukhari (Fat-hul Baari) (II/31 no. 553), dan Sunan an-Nasa-i (I/236)
+
+    Referensi : https://almanhaj.or.id/1189-waktu-waktu-shalat.html#_ftn10`,
+    content: `Barangsiapa meninggalkan shalat ‘Ashar, maka terhapuslah amalannya
+
+    Referensi : https://almanhaj.or.id/1189-waktu-waktu-shalat.html#_ftn10`,
+    id: 0,
+  },
+  {
+    author: `HR Muslim No.8`,
+    content: `Islam adalah, engkau bersaksi tidak ada yang berhak diibadahi dengan benar melainkan hanya Allah, dan sesungguhnya Muhammad adalah Rasul Allah; menegakkan shalat; menunaikan zakat; berpuasa di bulan Ramadhan, dan engkau menunaikan haji ke Baitullah, jika engkau telah mampu melakukannya,
+
+    Referensi : https://almanhaj.or.id/12057-syarah-hadits-jibril-tentang-islam-iman-dan-ihsan.html`,
+    id: 0,
+  },
+  {
+    author: "HR Tirmidzi No.413 dan HR An-Nasa'i No.466",
+    content: `Dari Abu Hurairah radhiyallahu 'anhu, Rasulullah shalallahu 'alaihi wa sallam bersabda yang artinya "Sesungguhnya amal yang pertama kali dihisab pada seorang hamba pada hari kiamat adalah shalatnya. Maka, jika shalatnya baik, sungguh ia telah beruntung dan berhasil. Dan jika shalatnya rusak, sungguh ia telah gagal dan rugi. Jika berkurang sedikit dari shalat wajibnya, maka Allah Ta'ala berfirman, "Lihatlah apakah hamba-Ku memiliki shalat sunnah." Maka disempurnakanlah apa yang kurang dengan seluruh amalnya`,
+    id: 0
+  },
+  {
+    author: "Surah Al-Mudatstsir:42-43",
+    content: `"Apakah yang memasukkan kamu ke dalam Saqar (neraka)?" Mereka menjawab: "Kami dahulu tidak termasuk orang-orang yang mengerjakan shalat"`,
+    id: 0
+  }
 ];
