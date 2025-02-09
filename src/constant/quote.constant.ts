@@ -112,5 +112,41 @@ export const QuoteSholat: Quote[] = [
     author: "Surah Al-Mudatstsir:42-43",
     content: `"Apakah yang memasukkan kamu ke dalam Saqar (neraka)?" Mereka menjawab: "Kami dahulu tidak termasuk orang-orang yang mengerjakan shalat"`,
     id: 0
+  },
+  {
+    author: "HR. Tirmidzi",
+    content: `Rasulullah shallallahu ‘alaihi wasallam bersabda, “Pokok dari perkara adalah Islam, tiangnya adalah salat, dan puncaknya adalah jihad.”
+    Referensi : https://muslim.or.id/100935-salat-adalah-ibadah-yang-agung-yakin-masih-mau-meninggalkannya.html`
+    id: 0
+  },
+  {
+    author: "HR. Bukhari no. 8 dan Muslim no. 16",
+    content: `Dari ‘Abdullah bin ’Umar radhiyallahu ’anhuma, Rasulullah shallallahu ’alaihi wa sallam bersabda, “Islam dibangun atas lima perkara, yaitu : (1) bersaksi bahwa tidak ada sesembahan yang benar untuk diibadahi kecuali Allah dan bersaksi bahwa Muhammad adalah utusan-Nya, (2) mendirikan shalat, (3) menunaikan zakat, (4) naik haji ke Baitullah -bagi yang mampu-, (5) berpuasa di bulan Ramadhan.”
+    Referensi : https://rumaysho.com/5911-shalat-adalah-tiang-agama.html`,
+    id: 0
+  },
+  {
+    author: "HR. Abu Dawud",
+    content: `“Perintahkanlah anak-anak kalian untuk salat di umur tujuh tahun, dan pukullah jika mereka tidak melaksanakannya di umur sepuluh tahun, dan pisahkanlah mereka dalam tempat tidurnya.”
+    Referensi : https://muslim.or.id/100935-salat-adalah-ibadah-yang-agung-yakin-masih-mau-meninggalkannya.html`,
+    id: 0
+  },
+  {
+    author: "HR. Ahmad, 6: 297. Syaikh Syu’aib Al-Arnauth mengatakan bahwa hadits ini hasan dengan berbagai penguatnya",
+    content: `Dari Ummu Salamah radhiyallahu ‘anha, Rasulullah shallallahu ‘alaihi wa sallam bersabda, “Sebaik-baik masjid bagi para wanita adalah di bagian dalam rumah mereka.”
+    Referensi : https://rumaysho.com/15669-shalat-wanita-di-masjid-ternyata-kalah-utama-dengan-shalat-wanita-di-rumahnya.html`,
+    id: 0
+  },
+  {
+    author: "HR. Muslim, no. 442",
+    content: `Dari Salim bin ‘Abdullah bin ‘Umar bahwasanya ‘Abdullah bin ‘Umar berkata, Aku mendengar Rasulullah shallallahu ‘alaihi wa sallam bersabda, “Janganlah kalian menghalangi istri-istri kalian untuk ke masjid. Jika mereka meminta izin pada kalian maka izinkanlah dia."
+    Referensi : https://rumaysho.com/15669-shalat-wanita-di-masjid-ternyata-kalah-utama-dengan-shalat-wanita-di-rumahnya.html`,
+    id: 0
+  },
+  {
+    author: "HR. Ahmad no. 15734. Syaikh Syu’aib Al Arnauth mengatakan hadits ini shohih ligoirihi",
+    content: `Tidak Dibolehkan Wanita yang Bukan Mahrom Bermakmum di Belakang Seorang Pria, Nabi shallallahu ‘alaihi wa sallam bersabda, “Janganlah seorang laki-laki berduaan dengan seorang wanita yang tidak halal baginya karena sesungguhnya syaithan adalah orang ketiga di antara mereka berdua kecuali apabila bersama mahromnya."
+    Referensi : https://rumaysho.com/558-bagaimana-shalat-jamaah-bagi-wanita.html`,
+    id: 0
   }
 ];
