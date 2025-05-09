@@ -116,7 +116,7 @@ export const QuoteSholat: Quote[] = [
   {
     author: "HR. Tirmidzi",
     content: `Rasulullah shallallahu ‘alaihi wasallam bersabda, “Pokok dari perkara adalah Islam, tiangnya adalah salat, dan puncaknya adalah jihad.”
-    Referensi : https://muslim.or.id/100935-salat-adalah-ibadah-yang-agung-yakin-masih-mau-meninggalkannya.html`
+    Referensi : https://muslim.or.id/100935-salat-adalah-ibadah-yang-agung-yakin-masih-mau-meninggalkannya.html`,
     id: 0
   },
   {
