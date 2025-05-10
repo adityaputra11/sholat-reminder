@@ -111,10 +111,12 @@ export async function showFullScreenAlert(
 export function generatePrayerTooltip(
   schedule: Schedule
 ): vscode.MarkdownString {
+  const isJumah = new Date().getDay() === 5;
+  const dzuhurTimeLabel = isJumah ? PrayName.Dzuhur + " (Jum'at)" : PrayName.Dzuhur;
   return new vscode.MarkdownString(
     `**Sholat**       **Waktu**  
      **${PrayName.Subuh}**:      ${schedule.subuh}  
-     **${PrayName.Dzuhur}**:     ${schedule.dzuhur}  
+     **${dzuhurTimeLabel}**:     ${schedule.dzuhur}  
      **${PrayName.Ashar}**:      ${schedule.ashar}  
      **${PrayName.Maghrib}**:    ${schedule.maghrib}  
      **${PrayName.Isya}**:       ${schedule.isya}`
