@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.9] - 2026-01-13
+
+- **Feat: Add more Hadith quotes (HR Tirmidzi, An-Nasa'i, and Surah Al-Mudatstsir)**
+- **Fix: Friday (Jum'at) label in prayer tooltip**
+- **Fix: Quote constant syntax error**
+
 ## [1.1.8] - 2024-12-26
 
 - **Chore: Improvement**
