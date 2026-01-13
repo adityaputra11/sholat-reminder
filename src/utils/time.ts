@@ -56,6 +56,7 @@ export function getInternationalToday() {
 export function getPrayerTimes(schedule: Schedule) {
   return [
     { name: PrayName.Subuh, time: schedule.subuh },
+    { name: PrayName.Terbit, time: schedule.terbit },
     { name: PrayName.Dzuhur, time: schedule.dzuhur },
     { name: PrayName.Ashar, time: schedule.ashar },
     { name: PrayName.Maghrib, time: schedule.maghrib },
@@ -77,6 +78,7 @@ export function convertScheduleTimingToSchedule(
 ): Schedule {
   return {
     subuh: timing.Fajr,
+    terbit: timing.Sunrise,
     dzuhur: timing.Dhuhr,
     ashar: timing.Asr,
     maghrib: timing.Maghrib,
@@ -89,6 +91,7 @@ export function convertSchedulePrayerToSchedule(
 ): Schedule {
   return {
     subuh: secondToTimeText(timing.fajr),
+    terbit: secondToTimeText(timing.syuruk),
     dzuhur: secondToTimeText(timing.dhuhr),
     ashar: secondToTimeText(timing.asr),
     maghrib: secondToTimeText(timing.maghrib),

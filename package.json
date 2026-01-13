@@ -4,7 +4,7 @@
   "icon": "media/icon.png",
   "license": "SEE LICENSE IN LICENSE.md",
   "description": "",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "author": "Aditya Putra Pratama",
   "publisher": "AdityaPutraPratama",
   "engines": {
@@ -50,28 +50,32 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
+    "vscode:build": "vsce package",
+    "vscode:prepublish": "bun run build:prod",
+    "compile": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "build:prod": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "watch": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --watch",
+    "pretest": "bun run compile && bun run lint",
     "lint": "eslint src",
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14",
-    "@types/mocha": "^10.0.9",
-    "@types/node": "^20.17.6",
+    "@types/jest": "^30.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.0.7",
     "@types/vscode": "^1.92.0",
-    "@typescript-eslint/eslint-plugin": "^8.10.0",
-    "@typescript-eslint/parser": "^8.7.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1",
-    "eslint": "^9.13.0",
-    "typescript": "^5.6.3",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.13.2",
     "country-state-city": "^3.2.1"
   }
 }

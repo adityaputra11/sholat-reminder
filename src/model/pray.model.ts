@@ -5,6 +5,7 @@ export type PrayTime = {
 
 export type Schedule = {
   subuh: string;
+  terbit: string;
   dzuhur: string;
   ashar: string;
   maghrib: string;

@@ -116,6 +116,7 @@ export function generatePrayerTooltip(
   return new vscode.MarkdownString(
     `**Sholat**       **Waktu**  
      **${PrayName.Subuh}**:      ${schedule.subuh}  
+     **${PrayName.Terbit}**:     ${schedule.terbit}  
      **${dzuhurTimeLabel}**:     ${schedule.dzuhur}  
      **${PrayName.Ashar}**:      ${schedule.ashar}  
      **${PrayName.Maghrib}**:    ${schedule.maghrib}  
