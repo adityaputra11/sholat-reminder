@@ -29,6 +29,7 @@ import { setReminderBeforePrayCommand } from "./commands/reminder.command";
 import { Command } from "./constant/command.constant";
 import { PrayService } from "./services/pray.service";
 import { Schedule } from "./model/pray.model";
+import { PrayerTreeDataProvider } from "./provider/prayerTreeDataProvider";
 
 export function activate(context: vscode.ExtensionContext) {
   if (getIsShowCityName(context) === undefined) {
@@ -64,6 +65,9 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
+  const prayerTreeDataProvider = new PrayerTreeDataProvider();
+  vscode.window.registerTreeDataProvider("sholat-schedule", prayerTreeDataProvider);
+
   const statusBar = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Right,
     100
@@ -79,6 +83,7 @@ export function activate(context: vscode.ExtensionContext) {
       statusBar.text = "Jadwal sholat berhasil diambil.";
       const service = new PrayService(context);
       const schedule = await service.getSchedule(date);
+      prayerTreeDataProvider.refresh(schedule);
       const lokasi = getCityName(context);
       const nowDateTime = new Date();
       //Generate Pray Time
@@ -217,4 +222,4 @@ export function activate(context: vscode.ExtensionContext) {
   getSholatTime(getToday());
 }
 
-export function deactivate() {}
+export function deactivate() { }

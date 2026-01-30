@@ -56,7 +56,6 @@ export function getInternationalToday() {
 export function getPrayerTimes(schedule: Schedule) {
   return [
     { name: PrayName.Subuh, time: schedule.subuh },
-    { name: PrayName.Terbit, time: schedule.terbit },
     { name: PrayName.Dzuhur, time: schedule.dzuhur },
     { name: PrayName.Ashar, time: schedule.ashar },
     { name: PrayName.Maghrib, time: schedule.maghrib },
@@ -100,7 +99,7 @@ export function convertSchedulePrayerToSchedule(
 }
 
 function secondToTimeText(n: number): string {
-  const date = new Date(n*1000);
+  const date = new Date(n * 1000);
   const formatter = new Intl.DateTimeFormat('en-US', {
     minute: "2-digit",
     hour: "2-digit",

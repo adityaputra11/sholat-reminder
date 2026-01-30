@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.0] - 2026-01-30
+
+- **Fix: Cleanup test command and fix search command typos**
+- **Fix: Register missing state and city-state commands in package.json**
+
+- **Feat: Enhanced Alert UI with Glassmorphism and modern aesthetics**
+- **Feat: Improve full-screen notification layout and typography**
+
+- **Fix: Monochromatic Activity Bar icon for better VS Code integration**
+- **Refactor: Switch to SVG for activity bar icon**
+
+- **Feat: Add Side Menu (Activity Bar) for Prayer Schedule**
+- **Fix: Remove "Terbit" (Sunrise) from notification logic**
+- **Doc: Add Roadmap and Development Standards to GEMINI.md**
+
 ## [1.1.9] - 2026-01-13
 
 - **Feat: Add more Hadith quotes (HR Tirmidzi, An-Nasa'i, and Surah Al-Mudatstsir)**
