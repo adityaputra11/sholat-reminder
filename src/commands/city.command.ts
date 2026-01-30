@@ -177,7 +177,7 @@ export async function searchStateCommand(context: vscode.ExtensionContext) {
 
 export async function searchCityStateCommand(context: vscode.ExtensionContext) {
   const quickPick = vscode.window.createQuickPick();
-  quickPick.placeholder = "Choose state ...";
+  quickPick.placeholder = "Choose city ...";
 
   try {
     // Fetch data state berdasarkan kode negara
@@ -211,7 +211,7 @@ export async function searchCityStateCommand(context: vscode.ExtensionContext) {
         saveCityName(context, cityName);
 
         vscode.window.showInformationMessage(
-          `State ${cityName} dengan ID ${cityCode} berhasil disimpan.`
+          `City ${cityName} dengan ID ${cityCode} berhasil disimpan.`
         );
         vscode.commands.executeCommand(Command.REFRESH);
         quickPick.hide();
