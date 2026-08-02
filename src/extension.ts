@@ -97,11 +97,11 @@ export function activate(context: vscode.ExtensionContext) {
         const prayTimeDate = new Date();
         prayTimeDate.setHours(hours, minutes, 0, 0);
 
-        if (prayTimeDate > nowDateTime) {
+        if (prayTimeDate >= nowDateTime) {
           handlePrayerCountdown(prayTimeDate, sholat, statusBar, lokasi);
           break;
         }
-        if (nowDateTime > prayTimeDate && sholat.name === PrayName.Isya) {
+        if (nowDateTime >= prayTimeDate && sholat.name === PrayName.Isya) {
           handleTomorrowCountdown(
             getTomorrowDate()[0],
             schedule,
